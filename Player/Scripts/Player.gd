@@ -26,8 +26,6 @@ func get_input():
 	velocity = velocity.normalized() * speed
 	
 func _physics_process(delta):
-	
-	PlayerVariables.playerpos = global_position
 	get_input()
 	velocity = move_and_slide(velocity)
 	

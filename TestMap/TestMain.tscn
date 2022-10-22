@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player/Sprite/Player_Place_Order.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://TestMap/Grille.jpeg" type="Texture" id=3]
+[ext_resource path="res://TestMap/Sprite/Grille.jpeg" type="Texture" id=3]
 [ext_resource path="res://Drone/Drone.tscn" type="PackedScene" id=4]
+[ext_resource path="res://TestMap/TestMain.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 979.104, 14.3014 )
@@ -12,15 +13,16 @@ extents = Vector2( 979.104, 14.3014 )
 extents = Vector2( 978.702, 11.3546 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 16.9202, 626.272 )
+extents = Vector2( 24.4899, 626.272 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8.33333 )
 
 [node name="TestMap" type="Node"]
+script = ExtResource( 6 )
 
 [node name="Cadriage" type="Sprite" parent="."]
-position = Vector2( 293, 262 )
+position = Vector2( 710, 534 )
 scale = Vector2( 0.561458, 0.550781 )
 texture = ExtResource( 3 )
 
@@ -41,11 +43,11 @@ position = Vector2( -972.468, -12.5975 )
 shape = SubResource( 5 )
 
 [node name="right" type="CollisionShape2D" parent="Cadriage/Collision map"]
-position = Vector2( 970.687, 5.44681 )
+position = Vector2( 978.256, 5.44678 )
 shape = SubResource( 5 )
 
 [node name="PlaceHolder" type="Sprite" parent="."]
-position = Vector2( 144, 247 )
+position = Vector2( 881, 302 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 __meta__ = {
@@ -58,7 +60,8 @@ mode = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlaceHolder/RigidBody2D"]
 shape = SubResource( 1 )
 
-[node name="Drone" parent="." instance=ExtResource( 4 )]
-
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 323, 245 )
+position = Vector2( 476, 451 )
+
+[node name="Drone" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1141, 430 )
