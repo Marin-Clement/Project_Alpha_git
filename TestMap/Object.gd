@@ -1,14 +1,39 @@
 extends Area2D
 
-signal give_object_stats
+var objecttype = "harvestable"
+var objectname
+var health
+var timetoharvest
+var amount
 
-var stats = {
-	"name": "Rock",
-	"health": 10
-}
+var over = preload("res://TestMap/Sprite/OverSprite.png")
+var working = preload("res://TestMap/Sprite/WorkingSprite.png")
 
-func _on_Object_input_event(viewport, event, shape_idx):
+func _ready():
+	$OverSprite.visible = false
+
+func _on_Object_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-			GameManager.lastobjectclicked = stats
-			print(GameManager.lastobjectclicked)
+			GameManager.lastobjectclicked = self
+			print("New target :",GameManager.lastobjectclicked.objectname)
+
+func _on_Object_mouse_entered():
+	$OverSprite.visible = true
+	$OverSprite.set_texture(over)
+	
+func _on_Object_mouse_exited():
+	$OverSprite.visible = false
+
+func _has_Been_Harvest():
+	GameManager.lastobjectclicked = null
+	queue_free()
+
+func _been_Harvest():
+	$OverSprite.visible = true
+	$OverSprite.set_texture(working)
+	
+func _cancel_targeted():
+	$OverSprite.visible = false
+
+

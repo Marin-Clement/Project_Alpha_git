@@ -1,27 +1,69 @@
 extends KinematicBody2D
 
-export (int) var speed = 1000
+export (int) var speed = (500)
 var acc = 1
 var realspeed
 onready var target = position
 var velocity = Vector2.ZERO
 var working = false
 var d = 0
+var radius = 100.0
+onready var player = get_node("/root/TestMap/Player")
+var idle = false
+var harvest = false
+var targetEnemy
+
+
+func _ready():
+	pass
+
 
 func _input(event):
 	if event.is_action_pressed("left_mouse"):
+		yield(_Wait(0.05),"completed")
 		acc = 0
-		target = get_global_mouse_position()
-		working = true	
+		if(GameManager.lastobjectclicked == null):
+			pass
+		else:
+			target = GameManager.lastobjectclicked.position
+			working = true
+		idle = false
+	if event.is_action_pressed("right_mouse") and harvest == false and GameManager.lastobjectclicked != null:
+		GameManager.lastobjectclicked._cancel_targeted()
+		working = false
+		yield(_Wait(0.01),"completed")
+		GameManager.lastobjectclicked = null
 
 func _physics_process(delta):
-	var player = get_node("/root/TestMap/Player")
+	d += delta
 	realspeed = speed * acc
-	if working == false:
+	# Follow player
+	if working == false and idle == false:
 		if position.distance_to(player.position) > 85:
-			_follow_player()
+			_follow_player(delta)
+			look_at(get_global_mouse_position())
+		elif(position.distance_to(player.position)) <= 86:
+			idle = true
+	# Give an order
 	elif working == true:
-		_move_to_target()
+		# Check if its an harvestable
+		if(GameManager.lastobjectclicked.objecttype == "harvestable"):
+			_move_to_target()
+			_Rotate_Around(GameManager.lastobjectclicked)
+			look_at(GameManager.lastobjectclicked.position)
+			GameManager.lastobjectclicked._been_Harvest()
+			if(harvest == false and position.distance_to(GameManager.lastobjectclicked.position) <= 101):
+				harvest = true
+				_harvest(GameManager.lastobjectclicked)
+		# Check if its an harvestable
+		elif(GameManager.lastobjectclicked.objecttype == "enemy"):
+			_target_Enemy(GameManager.lastobjectclicked, delta)
+	# Idle position
+	if(idle == true):
+		_Rotate_Around(player)
+		look_at(get_global_mouse_position())
+		if position.distance_to(player.position) > 150 or player.velocity != Vector2.ZERO:
+			idle = false
 	_acc()
 
 
@@ -29,20 +71,17 @@ func _move_to_target():
 	velocity = position.direction_to(target) * realspeed
 	if position.distance_to(target) > 5:
 		velocity = move_and_slide(velocity)
-	if position.distance_to(target) < 50:
-		yield(_Wait(1),"completed")
+	if position.distance_to(target) < 100:
 		velocity = Vector2.ZERO
-		working = false
 
 func _acc():
 	acc += 0.01
 	if acc > 1:
 		acc = 1
 
-func _follow_player():
-	var player = get_node("/root/TestMap/Player")
+func _follow_player(delta):
 	position += (player.position - position)/50
-	
+
 func _Wait(s):
 	var t = Timer.new()
 	t.set_wait_time(s)
@@ -51,3 +90,22 @@ func _Wait(s):
 	t.start()
 	yield(t, "timeout")
 	t.queue_free()
+
+func _Rotate_Around(object):
+	target = Vector2(sin(d) * radius,cos(d) * radius) + object.position
+	velocity = position.direction_to(target) * 100
+	velocity = move_and_slide(velocity)
+
+func _harvest(objectToHarvest):
+	print("harvesting...")
+	yield(_Wait(objectToHarvest.timetoharvest),"completed")
+	objectToHarvest._has_Been_Harvest()
+	print("finish harvesting")
+	print("+ ",objectToHarvest.amount," ",objectToHarvest.objectname)
+	working = false
+	harvest = false
+	
+func _target_Enemy(enemyToTarget, delta):
+	look_at(enemyToTarget.position)
+	_follow_player(delta)
+	enemyToTarget._been_targeted()
