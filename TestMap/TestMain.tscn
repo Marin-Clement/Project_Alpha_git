@@ -44,10 +44,16 @@ position = Vector2( 978.256, -2.77905 )
 shape = SubResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 709, 529 )
+position = Vector2( 1014, 700 )
 
 [node name="Drone" parent="." instance=ExtResource( 4 )]
-position = Vector2( 782, 462 )
+position = Vector2( 1130, 759 )
 
 [node name="Enemy" parent="." instance=ExtResource( 1 )]
-position = Vector2( 655, 256 )
+position = Vector2( 546, 255 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 813, 244 )
+
+[node name="Enemy4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1101, 345 )

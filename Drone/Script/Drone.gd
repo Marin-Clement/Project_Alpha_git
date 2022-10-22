@@ -11,7 +11,9 @@ var radius = 100.0
 onready var player = get_node("/root/TestMap/Player")
 var idle = false
 var harvest = false
-var targetEnemy
+var targetEnemy = false
+var fire_rate = 0.2
+var can_fire = true
 
 
 func _ready():
@@ -27,10 +29,15 @@ func _input(event):
 		else:
 			target = GameManager.lastobjectclicked.position
 			working = true
+		if(GameManager.lastobjectclicked != null):
+			if(GameManager.lastobjectclicked.objecttype == "enemy"): 
+				GameManager.enemyTarget = true
 		idle = false
+		
 	if event.is_action_pressed("right_mouse") and harvest == false and GameManager.lastobjectclicked != null:
 		GameManager.lastobjectclicked._cancel_targeted()
 		working = false
+		GameManager.enemyTarget = false
 		yield(_Wait(0.01),"completed")
 		GameManager.lastobjectclicked = null
 
@@ -47,17 +54,27 @@ func _physics_process(delta):
 	# Give an order
 	elif working == true:
 		# Check if its an harvestable
-		if(GameManager.lastobjectclicked.objecttype == "harvestable"):
-			_move_to_target()
-			_Rotate_Around(GameManager.lastobjectclicked)
-			look_at(GameManager.lastobjectclicked.position)
-			GameManager.lastobjectclicked._been_Harvest()
-			if(harvest == false and position.distance_to(GameManager.lastobjectclicked.position) <= 101):
-				harvest = true
-				_harvest(GameManager.lastobjectclicked)
-		# Check if its an harvestable
-		elif(GameManager.lastobjectclicked.objecttype == "enemy"):
-			_target_Enemy(GameManager.lastobjectclicked, delta)
+		if(GameManager.lastobjectclicked != null):
+			if(GameManager.lastobjectclicked.objecttype == "harvestable"):
+				_move_to_target()
+				_Rotate_Around(GameManager.lastobjectclicked)
+				look_at(GameManager.lastobjectclicked.position)
+				GameManager.lastobjectclicked._been_Harvest()
+				if(harvest == false and position.distance_to(GameManager.lastobjectclicked.position) <= 101):
+					harvest = true
+					_harvest(GameManager.lastobjectclicked)
+			#Check if its an enemy
+			if(GameManager.lastobjectclicked.objecttype == "enemy"):
+				if(GameManager.enemyTarget == true):
+					_target_Enemy(GameManager.lastobjectclicked, delta)
+					if can_fire:
+						can_fire = false
+						_shoot(GameManager.lastobjectclicked)
+						yield(_Wait(fire_rate),"completed")
+						can_fire = true
+				else:
+					working = false
+					targetEnemy = false
 	# Idle position
 	if(idle == true):
 		_Rotate_Around(player)
@@ -65,7 +82,7 @@ func _physics_process(delta):
 		if position.distance_to(player.position) > 150 or player.velocity != Vector2.ZERO:
 			idle = false
 	_acc()
-
+	print(GameManager.enemyTarget)
 
 func _move_to_target():
 	velocity = position.direction_to(target) * realspeed
@@ -107,5 +124,13 @@ func _harvest(objectToHarvest):
 	
 func _target_Enemy(enemyToTarget, delta):
 	look_at(enemyToTarget.position)
-	_follow_player(delta)
+	position += (player.position - Vector2(position.x + 100,position.y + 100))/20
 	enemyToTarget._been_targeted()
+	
+func _shoot(enemyToShoot):
+	var bullet = preload("res://Drone/Bullet.tscn").instance()
+	bullet.set_as_toplevel(true)
+	bullet.rotation_degrees = rotation_degrees
+	bullet.global_position = $muzzle.global_position
+	$muzzle.add_child(bullet)
+

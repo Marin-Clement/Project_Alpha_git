@@ -22,3 +22,6 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, -0.5 )
 shape = SubResource( 1 )
+
+[node name="muzzle" type="Position2D" parent="."]
+position = Vector2( 30, 0 )
