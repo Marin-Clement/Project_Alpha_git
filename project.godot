@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="Project Alpha"
+config/name="Project Alpha GIT"
 run/main_scene="res://TestMap/TestMain.tscn"
 config/icon="res://icon.png"
 

@@ -16,7 +16,6 @@ func _on_Object_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			GameManager.lastobjectclicked = self
-			print("New target :",GameManager.lastobjectclicked.objectname)
 
 func _on_Object_mouse_entered():
 	$OverSprite.visible = true

@@ -147,7 +147,7 @@ texture = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 10 )
 animation = "Idle"
-frame = 6
+frame = 4
 playing = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
