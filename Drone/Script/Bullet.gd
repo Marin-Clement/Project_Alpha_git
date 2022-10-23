@@ -1,14 +1,13 @@
 extends Area2D
 
-var speed = 6
+var speed = 10
 var damage = 10
 
 func _process(delta):
-	position += transform.x*speed
+	position += (transform.x*speed)
 
 
 func _on_Bullet_body_entered(body):
-	print(body)
 	if !body.is_in_group("enemy"):
 		queue_free()
 
