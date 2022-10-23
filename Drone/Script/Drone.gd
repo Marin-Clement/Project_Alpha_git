@@ -12,7 +12,7 @@ onready var player = get_node("/root/TestMap/Player")
 var idle = false
 var harvest = false
 var targetEnemy = false
-var fire_rate = 0.2
+var fire_rate = 0.3
 var can_fire = true
 
 
@@ -82,7 +82,6 @@ func _physics_process(delta):
 		if position.distance_to(player.position) > 150 or player.velocity != Vector2.ZERO:
 			idle = false
 	_acc()
-	print(GameManager.enemyTarget)
 
 func _move_to_target():
 	velocity = position.direction_to(target) * realspeed

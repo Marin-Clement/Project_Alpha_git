@@ -1,6 +1,6 @@
 extends Area2D
 
-var speed = 4
+var speed = 6
 var damage = 10
 
 func _process(delta):

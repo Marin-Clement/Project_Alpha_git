@@ -12,6 +12,7 @@ var working = preload("res://TestMap/Sprite/WorkingSprite.png")
 func _ready():
 	$OverSprite.visible = false
 
+
 func _on_Object_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
@@ -32,8 +33,7 @@ func _has_Been_Harvest():
 func _been_Harvest():
 	$OverSprite.visible = true
 	$OverSprite.set_texture(working)
-	
+
 func _cancel_targeted():
 	$OverSprite.visible = false
-
 
