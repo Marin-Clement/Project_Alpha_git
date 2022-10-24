@@ -1,8 +1,10 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Enemy_Test/Sprites/Skeleton Warrior.png" type="Texture" id=1]
 [ext_resource path="res://Enemy_Test/Scripts/Enemy.gd" type="Script" id=2]
 [ext_resource path="res://Enemy_Test/Sprites/OverSprite.png" type="Texture" id=3]
+[ext_resource path="res://GUI/Sprite/FillHealth.png" type="Texture" id=4]
+[ext_resource path="res://GUI/Sprite/HealthBar.png" type="Texture" id=5]
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 1 )
@@ -144,6 +146,7 @@ texture = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 10 )
 animation = "Idle"
+frame = 2
 playing = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
@@ -156,17 +159,16 @@ shape = SubResource( 1 )
 shape = SubResource( 29 )
 
 [node name="Control" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
 
-[node name="HealtBar" type="ProgressBar" parent="Control"]
-margin_left = -16.3333
-margin_top = -21.0
-margin_right = 31.6667
-margin_bottom = -7.0
-rect_scale = Vector2( 0.544285, 0.485305 )
-value = 100.0
-percent_visible = false
+[node name="HealthBar" type="TextureProgress" parent="Control"]
+margin_left = 5.66667
+margin_top = 9.66667
+margin_right = 21.6667
+margin_bottom = 12.6667
+rect_rotation = -90.0
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 4 )
+texture_progress_offset = Vector2( 1, 1 )
 
 [connection signal="input_event" from="." to="." method="_on_Enemy_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_Enemy_mouse_entered"]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Player_Place_Order.png-ddbaca2d920430feddb7908233951ff6.stex"
+path="res://.import/ItemSlot.png-484a91104dd277461030f09ae670204a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/Sprite/Player_Place_Order.png"
-dest_files=[ "res://.import/Player_Place_Order.png-ddbaca2d920430feddb7908233951ff6.stex" ]
+source_file="res://GUI/Sprite/ItemSlot.png"
+dest_files=[ "res://.import/ItemSlot.png-484a91104dd277461030f09ae670204a.stex" ]
 
 [params]
 
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

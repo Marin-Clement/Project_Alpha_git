@@ -132,4 +132,3 @@ func _shoot(enemyToShoot):
 	bullet.rotation_degrees = rotation_degrees
 	bullet.global_position = $muzzle.global_position
 	$muzzle.add_child(bullet)
-

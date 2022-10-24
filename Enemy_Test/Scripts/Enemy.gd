@@ -10,7 +10,7 @@ signal enemydead
 
 func _ready():
 	$OverSprite.visible = false
-	$Control/HealtBar.visible = false
+	$Control/HealthBar.visible = false
 
 func _on_Enemy_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
@@ -28,19 +28,19 @@ func _on_Enemy_mouse_exited():
 func _been_targeted():
 	$OverSprite.visible = true
 	$OverSprite.set_texture(working)
-	$Control/HealtBar.visible = true
+	$Control/HealthBar.visible = true
 	
 func _cancel_targeted():
 	$OverSprite.visible = false
-	$Control/HealtBar.visible = false
+	$Control/HealthBar.visible = false
 
 func _take_Damage(damage):
 	health -= damage
 
 func _physics_process(delta):
-	$Control/HealtBar.value = health
+	$Control/HealthBar.value = health
 	if health <= 0:
-		$Control/HealtBar.visible = false
+		$Control/HealthBar.visible = false
 		$AnimatedSprite.animation = "Death"
 		$OverSprite.visible = false
 		GameManager.enemyTarget = false
