@@ -1,0 +1,26 @@
+extends NinePatchRect
+
+export( NodePath ) onready var inventory = get_node( inventory ) as Inventory
+
+var open = true
+
+func _ready():
+	rect_size.y = 20 + inventory.rect_size.y
+
+
+	
+func _on_close_pressed():
+	hide()
+
+
+func _input(event):
+	if event.is_action_pressed("inventory"):
+		if open == true:
+			print("bye")
+			hide()
+			open = false
+		elif open == false:
+			print("hello")
+			show()
+			open = true
+

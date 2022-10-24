@@ -8,6 +8,7 @@ var velocity = Vector2.ZERO
 var working = false
 var d = 0
 var radius = 100.0
+onready var playerinventory = preload( "res://inventory/inventory_player.tscn" )
 onready var player = get_node("/root/TestMap/Player")
 var idle = false
 var harvest = false
@@ -18,7 +19,6 @@ var can_fire = true
 
 func _ready():
 	pass
-
 
 func _input(event):
 	if event.is_action_pressed("left_mouse"):
@@ -118,6 +118,7 @@ func _harvest(objectToHarvest):
 	objectToHarvest._has_Been_Harvest()
 	print("finish harvesting")
 	print("+ ",objectToHarvest.amount," ",objectToHarvest.objectname)
+	playerinventory.instance().get_node("inventory_container/inventory").add_item(ItemManager.get_item( "stone_brick" ))
 	working = false
 	harvest = false
 	
