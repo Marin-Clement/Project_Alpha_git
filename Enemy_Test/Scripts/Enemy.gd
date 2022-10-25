@@ -3,12 +3,17 @@ extends Area2D
 var objecttype = "enemy"
 var enemyname = "skeleton"
 var health = 100
+var trackenemybody
+var baseposition
+var alive
 
 var over = preload("res://Enemy_Test/Sprites/OverSprite.png")
 var working = preload("res://TestMap/Sprite/WorkingSprite.png")
 signal enemydead
 
 func _ready():
+	alive = true
+	baseposition = position
 	$OverSprite.visible = false
 	$Control/HealthBar.visible = false
 
@@ -39,7 +44,12 @@ func _take_Damage(damage):
 
 func _physics_process(delta):
 	$Control/HealthBar.value = health
+	if trackenemybody != null and alive:
+		position += (trackenemybody.position - position)/100
+	else:
+		position += (baseposition - position)/30
 	if health <= 0:
+		alive = false
 		$Control/HealthBar.visible = false
 		$AnimatedSprite.animation = "Death"
 		$OverSprite.visible = false
@@ -47,16 +57,23 @@ func _physics_process(delta):
 		yield(get_tree().create_timer(0.1),"timeout")
 		GameManager.lastobjectclicked = null
 		yield(get_tree().create_timer(0.2),"timeout")
-		queue_free()
+		hide()
+		yield(get_tree().create_timer(1),"timeout")
+		show()
+		alive = true
+		health = 100
+		$AnimatedSprite.animation = "Idle"
 
 func _on_Detect_zone_body_entered(body):
 		if body.is_in_group("player"):
+			trackenemybody = body
 			$OverSprite.visible = true
 			$OverSprite.set_texture(over)
 
 
 func _on_Detect_zone_body_exited(body):
 		if body.is_in_group("player"):
+			trackenemybody = null
 			$OverSprite.visible = false
 
 

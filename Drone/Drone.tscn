@@ -1,7 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Drone/Script/Drone.gd" type="Script" id=1]
-[ext_resource path="res://Drone/Sprites/drone.png" type="Texture" id=2]
+[ext_resource path="res://Drone/Sprites/drone4.png" type="Texture" id=2]
+[ext_resource path="res://Drone/Sprites/drone1.png" type="Texture" id=3]
+[ext_resource path="res://Drone/Sprites/drone6.png" type="Texture" id=4]
+[ext_resource path="res://Drone/Sprites/drone3.png" type="Texture" id=5]
+[ext_resource path="res://Drone/Sprites/drone2.png" type="Texture" id=6]
+[ext_resource path="res://Drone/Sprites/drone5.png" type="Texture" id=7]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 7 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31.5, 31.5 )
@@ -14,10 +27,15 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -0.499999, -0.499999 )
 rotation = -1.5708
-scale = Vector2( 2, 2 )
-texture = ExtResource( 2 )
+scale = Vector2( 1.96875, 1.96875 )
+frames = SubResource( 2 )
+animation = "idle"
+frame = 2
+speed_scale = 10.0
+playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, -0.5 )

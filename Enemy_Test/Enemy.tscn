@@ -6,6 +6,9 @@
 [ext_resource path="res://GUI/Sprite/FillHealth.png" type="Texture" id=4]
 [ext_resource path="res://GUI/Sprite/HealthBar.png" type="Texture" id=5]
 
+[sub_resource type="CapsuleShape2D" id=1]
+height = 16.56
+
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 192, 48, 48 )
@@ -128,15 +131,17 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=1]
-height = 16.56
-
 [sub_resource type="CircleShape2D" id=29]
 radius = 77.0115
 
 [node name="Enemy" type="Area2D" groups=["enemy"]]
-scale = Vector2( 3, 3 )
+scale = Vector2( 2, 2 )
+collision_layer = 5
 script = ExtResource( 2 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2( -4.872, 1.28 )
+shape = SubResource( 1 )
 
 [node name="OverSprite" type="Sprite" parent="."]
 position = Vector2( -4.66667, 18.3333 )
@@ -146,12 +151,8 @@ texture = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 10 )
 animation = "Idle"
-frame = 2
+frame = 6
 playing = true
-
-[node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2( -4.872, 1.28 )
-shape = SubResource( 1 )
 
 [node name="Detect_zone" type="Area2D" parent="."]
 
