@@ -20,9 +20,7 @@ func _input(event):
 	if event.is_action_pressed("left_mouse"):
 		yield(_Wait(0.05),"completed")
 		acc = 0
-		if(GameManager.lastobjectclicked == null):
-			pass
-		else:
+		if(GameManager.lastobjectclicked != null):
 			target = GameManager.lastobjectclicked.position
 			working = true
 		if(GameManager.lastobjectclicked != null):
@@ -51,7 +49,7 @@ func _physics_process(delta):
 	elif working == true:
 		# Check if its an harvestable
 		if(GameManager.lastobjectclicked != null):
-			if(GameManager.lastobjectclicked.objecttype == "harvestable"):
+			if(GameManager.lastobjectclicked.objecttype == "harvestable" ):
 				_move_to_target()
 				_Rotate_Around(GameManager.lastobjectclicked)
 				look_at(GameManager.lastobjectclicked.position)
@@ -110,9 +108,11 @@ func _Rotate_Around(object):
 
 func _harvest(objectToHarvest):
 	print("harvesting...")
+	GameManager.harvestingState = true
 	yield(_Wait(objectToHarvest.timetoharvest),"completed")
 	objectToHarvest._has_Been_Harvest()
 	print("finish harvesting")
+	GameManager.harvestingState = false
 	emit_signal("giveplayeritem", "stone_brick")
 	print("+ ",objectToHarvest.amount," ",objectToHarvest.objectname)
 	working = false

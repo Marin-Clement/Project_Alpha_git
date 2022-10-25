@@ -12,10 +12,9 @@ var working = preload("res://TestMap/Sprite/WorkingSprite.png")
 func _ready():
 	$OverSprite.visible = false
 
-
 func _on_Object_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
-		if event.is_pressed():
+		if event.is_pressed() and !GameManager.harvestingState:
 			GameManager.lastobjectclicked = self
 
 func _on_Object_mouse_entered():
