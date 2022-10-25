@@ -10,6 +10,7 @@ func _ready():
 
 func set_item( new_item ):
 	item = new_item
+	$item_container.add_child( item )
 	print("add", item.item_name)
 
 func pick_item():

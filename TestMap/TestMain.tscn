@@ -107,5 +107,17 @@ size = 5
 inventory_name = "Cool Chest"
 items = [ "stone_brick", "stone_brick", "stone_brick", "stone_brick" ]
 
+[node name="chest2" type="Button" parent="ui"]
+margin_left = 181.0
+margin_top = 543.0
+margin_right = 289.0
+margin_bottom = 575.0
+text = "chest2"
+script = ExtResource( 9 )
+size = 5
+inventory_name = "Cool Chest"
+items = [ "gold", "stone_brick", "gold", "gold" ]
+
 [connection signal="giveplayeritem" from="Drone" to="ui/inventory_player" method="_on_Drone_giveplayeritem"]
 [connection signal="pressed" from="ui/chest" to="ui/chest" method="_on_chest_pressed"]
+[connection signal="pressed" from="ui/chest2" to="ui/chest2" method="_on_chest_pressed"]
