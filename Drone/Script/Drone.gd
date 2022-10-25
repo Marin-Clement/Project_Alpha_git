@@ -28,7 +28,7 @@ func _input(event):
 				GameManager.enemyTarget = true
 		idle = false
 		
-	if event.is_action_pressed("right_mouse") and harvest == false and GameManager.lastobjectclicked != null:
+	if event.is_action_pressed("right_mouse") and GameManager.lastobjectclicked != null:
 		GameManager.lastobjectclicked._cancel_targeted()
 		working = false
 		GameManager.enemyTarget = false
@@ -108,15 +108,18 @@ func _Rotate_Around(object):
 
 func _harvest(objectToHarvest):
 	print("harvesting...")
-	GameManager.harvestingState = true
 	yield(_Wait(objectToHarvest.timetoharvest),"completed")
-	objectToHarvest._has_Been_Harvest()
-	print("finish harvesting")
-	GameManager.harvestingState = false
-	emit_signal("giveplayeritem", "stone_brick")
-	print("+ ",objectToHarvest.amount," ",objectToHarvest.objectname)
-	working = false
-	harvest = false
+	if objectToHarvest != GameManager.lastobjectclicked or null:
+		print("cancel harvest")
+		objectToHarvest._cancel_targeted()
+		harvest = false
+	else:
+		objectToHarvest._has_Been_Harvest()
+		print("finish harvesting")
+		emit_signal("giveplayeritem", "stone_brick")
+		print("+ ",objectToHarvest.amount," ",objectToHarvest.objectname)
+		working = false
+		harvest = false
 	
 func _target_Enemy(enemyToTarget, delta):
 	look_at(enemyToTarget.position)

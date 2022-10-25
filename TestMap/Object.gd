@@ -14,7 +14,7 @@ func _ready():
 
 func _on_Object_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
-		if event.is_pressed() and !GameManager.harvestingState:
+		if event.is_pressed():
 			GameManager.lastobjectclicked = self
 
 func _on_Object_mouse_entered():
@@ -26,7 +26,10 @@ func _on_Object_mouse_exited():
 
 func _has_Been_Harvest():
 	GameManager.lastobjectclicked = null
-	queue_free()
+	hide()
+	yield(get_tree().create_timer(2),"timeout")
+	show()
+	$OverSprite.visible = false
 
 func _been_Harvest():
 	$OverSprite.visible = true

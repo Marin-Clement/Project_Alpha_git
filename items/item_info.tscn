@@ -18,7 +18,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 script = ExtResource( 4 )
-item_name = NodePath("title/Label")
+item_name = NodePath("title/item_name")
 
 [node name="title" type="NinePatchRect" parent="."]
 anchor_left = 0.5
@@ -33,7 +33,7 @@ patch_margin_top = 6
 patch_margin_right = 8
 patch_margin_bottom = 2
 
-[node name="Label" type="Label" parent="title"]
+[node name="item_name" type="Label" parent="title"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 4.0

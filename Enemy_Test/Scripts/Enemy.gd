@@ -58,7 +58,7 @@ func _physics_process(delta):
 		GameManager.lastobjectclicked = null
 		yield(get_tree().create_timer(0.2),"timeout")
 		hide()
-		yield(get_tree().create_timer(1),"timeout")
+		yield(get_tree().create_timer(2),"timeout")
 		show()
 		alive = true
 		health = 100

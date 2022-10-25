@@ -151,7 +151,6 @@ texture = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 10 )
 animation = "Idle"
-frame = 6
 playing = true
 
 [node name="Detect_zone" type="Area2D" parent="."]

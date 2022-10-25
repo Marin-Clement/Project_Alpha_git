@@ -1,0 +1,6 @@
+{
+    "stone_brick":{
+        "name": "Stone Brick",
+        "stack_size": 10
+    }
+}

@@ -5,8 +5,7 @@ export( NodePath ) onready var item_container = get_node( item_container ) as Co
 var item : Item
 
 func _ready():
-	if item:
-		item_container.add_child( item )
+	pass
 
 func set_item( new_item ):
 	item = new_item

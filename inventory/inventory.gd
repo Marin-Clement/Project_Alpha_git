@@ -30,6 +30,8 @@ func set_inventory_size( value ):
 func add_item( item ):
 	for s in slots:
 		if not s.item:
-			print(inventory_name, " ADD ", item.item_name)
 			s.set_item( item )
+			return
+		elif s.item.quantity < s.item.stack_size and s.item.id == item.id:
+			s.item.quantity += 1
 			return

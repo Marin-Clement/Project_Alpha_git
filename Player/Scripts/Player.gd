@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export (int) var speed = 300
+export (int) var speed = 200
 
 var velocity = Vector2()
 
@@ -21,7 +21,7 @@ func get_input():
 		speed = 400
 		$AnimatedSprite.speed_scale = 2
 	if Input.is_action_just_released("sprint"):
-		speed = 300
+		speed = 200
 		$AnimatedSprite.speed_scale = 1
 	velocity = velocity.normalized() * speed
 	

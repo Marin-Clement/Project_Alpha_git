@@ -38,12 +38,21 @@ func _on_gui_input_slot( event : InputEvent, slot : Inventory_Slot ):
 			item_in_hand_node.remove_child( item_in_hand )
 			
 			if slot.item:
-				var temp_item = slot.item
-				slot.pick_item()
-				temp_item.rect_global_position = event.global_position - item_offset
-				slot.put_item( item_in_hand )
-				item_in_hand = temp_item
-				item_in_hand_node.add_child( item_in_hand )
+				if slot.item.id == item_in_hand.id and slot.item.quantity < slot.item.stack_size:
+					var remainder = slot.item.add_item_quantity( item_in_hand.quantity )
+					
+					if remainder < 1:
+						item_in_hand = null
+					else:
+						item_in_hand_node.add_child( item_in_hand )
+						item_in_hand.quantity = remainder
+				else:
+					var temp_item = slot.item
+					slot.pick_item()
+					temp_item.rect_global_position = event.global_position - item_offset
+					slot.put_item( item_in_hand )
+					item_in_hand = temp_item
+					item_in_hand_node.add_child( item_in_hand )
 			else:
 				slot.put_item( item_in_hand )
 				item_in_hand = null
@@ -54,3 +63,4 @@ func _on_gui_input_slot( event : InputEvent, slot : Inventory_Slot ):
 			slot.pick_item()
 			item_in_hand_node.add_child( item_in_hand )
 			item_in_hand.rect_global_position = event.global_position - item_offset
+
