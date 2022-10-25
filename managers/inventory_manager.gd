@@ -22,6 +22,8 @@ func _on_inventory_ready( inventory ):
 func _input( event : InputEvent ):
 	if event is InputEventMouseMotion and item_in_hand:
 		item_in_hand.rect_position = event.position - item_offset
+	if event.is_action_pressed("inventory"):
+		item_info.hide()
 
 func _on_mouse_entered_slot( slot ):
 	if slot.item:
@@ -52,9 +54,3 @@ func _on_gui_input_slot( event : InputEvent, slot : Inventory_Slot ):
 			slot.pick_item()
 			item_in_hand_node.add_child( item_in_hand )
 			item_in_hand.rect_global_position = event.global_position - item_offset
-
-
-
-
-
-

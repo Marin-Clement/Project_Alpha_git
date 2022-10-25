@@ -107,4 +107,5 @@ size = 5
 inventory_name = "Cool Chest"
 items = [ "stone_brick", "stone_brick", "stone_brick", "stone_brick" ]
 
+[connection signal="giveplayeritem" from="Drone" to="ui/inventory_player" method="_on_Drone_giveplayeritem"]
 [connection signal="pressed" from="ui/chest" to="ui/chest" method="_on_chest_pressed"]
