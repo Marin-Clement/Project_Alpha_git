@@ -33,4 +33,3 @@ func add_item( item ):
 			print(inventory_name, " ADD ", item.item_name)
 			s.set_item( item )
 			return
-
