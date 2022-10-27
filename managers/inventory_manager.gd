@@ -63,4 +63,14 @@ func _on_gui_input_slot( event : InputEvent, slot : Inventory_Slot ):
 			slot.pick_item()
 			item_in_hand_node.add_child( item_in_hand )
 			item_in_hand.rect_global_position = event.global_position - item_offset
-
+			
+	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_RIGHT:
+		if slot.item:
+			if slot.item.quantity > 1:
+				var new_item = ItemManager.get_item( slot.item.id )
+				new_item.quantity  = int( slot.item.quantity / 2 )
+				slot.item.quantity = round ( float(slot.item.quantity) / 2 )
+				item_in_hand = new_item
+				new_item.pick_item()
+				item_in_hand_node.add_child( item_in_hand )
+				item_in_hand.rect_global_position = event.global_position - item_offset

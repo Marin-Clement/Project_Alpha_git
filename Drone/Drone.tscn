@@ -20,6 +20,7 @@ animations = [ {
 extents = Vector2( 31.5, 31.5 )
 
 [node name="Drone" type="KinematicBody2D"]
+scale = Vector2( 0.8, 0.8 )
 collision_layer = 0
 collision_mask = 2
 script = ExtResource( 1 )
@@ -33,7 +34,6 @@ rotation = -1.5708
 scale = Vector2( 1.96875, 1.96875 )
 frames = SubResource( 2 )
 animation = "idle"
-frame = 2
 speed_scale = 10.0
 playing = true
 

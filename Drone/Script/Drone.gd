@@ -7,7 +7,7 @@ onready var target = position
 var velocity = Vector2.ZERO
 var working = false
 var d = 0
-var radius = 100.0
+var radius = 75.0
 onready var player = get_node("/root/TestMap/Player")
 var idle = false
 var harvest = false
@@ -103,7 +103,7 @@ func _Wait(s):
 
 func _Rotate_Around(object):
 	target = Vector2(sin(d) * radius,cos(d) * radius) + object.position
-	velocity = position.direction_to(target) * 100
+	velocity = position.direction_to(target) * 75
 	velocity = move_and_slide(velocity)
 
 func _harvest(objectToHarvest):

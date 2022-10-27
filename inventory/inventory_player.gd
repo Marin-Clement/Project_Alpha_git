@@ -18,11 +18,9 @@ func _on_close_pressed():
 func _input(event):
 	if event.is_action_pressed("inventory"):
 		if open == true:
-			print("bye")
 			hide()
 			open = false
 		elif open == false:
-			print("hello")
 			show()
 			open = true
 

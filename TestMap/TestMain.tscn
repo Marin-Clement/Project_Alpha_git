@@ -1790,10 +1790,10 @@ __meta__ = {
 }
 
 [node name="chest" type="Button" parent="ui"]
-margin_left = 2.0
-margin_top = 672.0
-margin_right = 110.0
-margin_bottom = 704.0
+margin_left = 7.0
+margin_top = 539.0
+margin_right = 115.0
+margin_bottom = 571.0
 text = "chest"
 script = ExtResource( 9 )
 size = 20
@@ -1801,10 +1801,10 @@ inventory_name = "Cool Chest"
 items = [ "stone_brick", "stone_brick", "stone_brick", "stone_brick", "stone_brick" ]
 
 [node name="chest2" type="Button" parent="ui"]
-margin_left = 130.0
-margin_top = 672.0
-margin_right = 238.0
-margin_bottom = 704.0
+margin_left = 143.0
+margin_top = 538.0
+margin_right = 251.0
+margin_bottom = 570.0
 text = "chest2"
 script = ExtResource( 9 )
 size = 10

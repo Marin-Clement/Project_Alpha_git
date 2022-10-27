@@ -18,7 +18,7 @@ func get_input():
 	if Input.is_action_pressed("up"):
 		velocity.y -= 1
 	if Input.is_action_just_pressed("sprint"):
-		speed = 400
+		speed = 300
 		$AnimatedSprite.speed_scale = 2
 	if Input.is_action_just_released("sprint"):
 		speed = 200
