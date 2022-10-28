@@ -17,7 +17,7 @@ func _ready():
 	$OverSprite.visible = false
 	$Control/HealthBar.visible = false
 
-func _on_Enemy_input_event(viewport, event, shape_idx):
+func _on_Enemy_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			GameManager.lastobjectclicked = self
@@ -42,7 +42,7 @@ func _cancel_targeted():
 func _take_Damage(damage):
 	health -= damage
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	$Control/HealthBar.value = health
 	if trackenemybody != null and alive:
 		position += (trackenemybody.position - position)/100

@@ -22,10 +22,14 @@ stack_size = 10
 quantity = 1
 
 [node name="lbl_quantity" type="Label" parent="."]
-margin_left = -1.0
-margin_top = -5.0
-margin_right = 13.0
-margin_bottom = 10.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_top = -10.0
+margin_right = 10.0
+margin_bottom = 5.0
 custom_colors/font_color = Color( 0.231373, 0.698039, 0.623529, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "1"

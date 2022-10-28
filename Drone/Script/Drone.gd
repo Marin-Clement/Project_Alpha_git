@@ -63,7 +63,7 @@ func _physics_process(delta):
 					_target_Enemy(GameManager.lastobjectclicked, delta)
 					if can_fire:
 						can_fire = false
-						_shoot(GameManager.lastobjectclicked)
+						_shoot()
 						yield(_Wait(fire_rate),"completed")
 						can_fire = true
 				else:
@@ -89,7 +89,7 @@ func _acc():
 	if acc > 1:
 		acc = 1
 
-func _follow_player(delta):
+func _follow_player(_delta):
 	position += (player.position - position)/50
 
 func _Wait(s):
@@ -121,12 +121,12 @@ func _harvest(objectToHarvest):
 		working = false
 		harvest = false
 	
-func _target_Enemy(enemyToTarget, delta):
+func _target_Enemy(enemyToTarget, _delta):
 	look_at(enemyToTarget.position)
 	position += (player.position - Vector2(position.x + 100,position.y + 100))/20
 	enemyToTarget._been_targeted()
 	
-func _shoot(enemyToShoot):
+func _shoot():
 	var bullet = preload("res://Drone/Bullet.tscn").instance()
 	bullet.set_as_toplevel(true)
 	bullet.rotation_degrees = rotation_degrees

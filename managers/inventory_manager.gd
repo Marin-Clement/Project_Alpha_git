@@ -66,7 +66,7 @@ func _on_gui_input_slot( event : InputEvent, slot : Inventory_Slot ):
 			
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_RIGHT:
 		if slot.item:
-			if slot.item.quantity > 1:
+			if slot.item.quantity > 1 and item_in_hand == null:
 				var new_item = ItemManager.get_item( slot.item.id )
 				new_item.quantity  = int( slot.item.quantity / 2 )
 				slot.item.quantity = round ( float(slot.item.quantity) / 2 )
@@ -74,3 +74,28 @@ func _on_gui_input_slot( event : InputEvent, slot : Inventory_Slot ):
 				new_item.pick_item()
 				item_in_hand_node.add_child( item_in_hand )
 				item_in_hand.rect_global_position = event.global_position - item_offset
+			elif item_in_hand:
+				
+				if item_in_hand.quantity > 1:
+					slot.item.quantity += 1
+					item_in_hand.quantity -= 1
+				
+				elif item_in_hand.quantity == 1:
+					slot.item.quantity += 1
+					item_in_hand.quantity -= 1
+					item_in_hand_node.remove_child( item_in_hand )
+					item_in_hand = null
+		if slot.item == null and item_in_hand:
+			
+			if item_in_hand.quantity > 1:
+				var new_item = ItemManager.get_item( item_in_hand.id )
+				slot.item = new_item
+				slot.set_item( slot.item )
+				item_in_hand.quantity -= 1
+			
+			elif item_in_hand.quantity == 1:
+				var new_item = ItemManager.get_item( item_in_hand.id )
+				slot.item = new_item
+				slot.set_item( slot.item )
+				item_in_hand_node.remove_child( item_in_hand )
+				item_in_hand = null
